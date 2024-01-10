@@ -476,3 +476,51 @@ PING compose-test-conteneur_nul-1 (172.18.0.3) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.108/0.446/13.757/1.831 ms
 root@44232bc335f6:/#
 ```
+
+ps: j'avais ping le mauvais container la semaine derniere, voici le bon :
+
+'''
+[hicham@localhost compose-test]$ docker exec -it conteneur_nul-1 bash
+Error response from daemon: No such container: conteneur_nul-1
+Need to get 96.2 kB of archives.
+After this operation, 311 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libcap2-bin amd64 1:2.66-4 [34.7 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 iputils-ping amd64 3:20221126-1 [47.1 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libpam-cap amd64 1:2.66-4 [14.5 kB]
+Fetched 96.2 kB in 1s (75.8 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libcap2-bin.
+(Reading database ... 6098 files and directories currently installed.)
+Preparing to unpack .../libcap2-bin_1%3a2.66-4_amd64.deb ...
+Unpacking libcap2-bin (1:2.66-4) ...
+Selecting previously unselected package iputils-ping.
+Preparing to unpack .../iputils-ping_3%3a20221126-1_amd64.deb ...
+Unpacking iputils-ping (3:20221126-1) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../libpam-cap_1%3a2.66-4_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.66-4) ...
+Setting up libcap2-bin (1:2.66-4) ...
+Setting up libpam-cap:amd64 (1:2.66-4) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up iputils-ping (3:20221126-1) ...
+root@4b8b175f53d1:/# ping conteneur_flopesque
+PING conteneur_flopesque (172.18.0.3) 56(84) bytes of data.
+64 bytes from compose-test-conteneur_flopesque-1.compose-test_default (172.18.0.3): icmp_seq=1 ttl=64 time=0.481 ms
+64 bytes from compose-test-conteneur_flopesque-1.compose-test_default (172.18.0.3): icmp_seq=2 ttl=64 time=12.7 ms
+...
+...
+...
+64 bytes from compose-test-conteneur_flopesque-1.compose-test_default (172.18.0.3): icmp_seq=120 ttl=64 time=0.117 ms
+^C
+--- conteneur_flopesque ping statistics ---
+120 packets transmitted, 120 received, 0% packet loss, time 120132ms
+rtt min/avg/max/mdev = 0.109/0.381/12.710/1.170 ms
+root@4b8b175f53d1:/#
+
+
+'''
