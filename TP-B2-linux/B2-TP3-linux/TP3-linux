@@ -1,0 +1,40 @@
+# TP3 Admin : Vagrant
+
+
+## 1. Une première VM
+
+### 🌞 Générer un Vagrantfile
+
+
+```
+PS C:\Users\belma> mkdir ~/work/vagrant/test
+    Directory: C:\Users\belma\work\vagrant
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        11/01/2024     15:13                test
+
+
+PS C:\Users\belma> cd ~/work/vagrant/test
+PS C:\Users\belma\work\vagrant\test> vagrant init generic/ubuntu2204
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+```
+
+### 🌞 Modifier le Vagrantfile
+
+```
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "generic/ubuntu2204"
+  config.vm.box_check_update = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+end
+```
+
+🌞 Faire joujou avec une VM
+
