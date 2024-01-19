@@ -1,0 +1,50 @@
+
+
+machines=[
+  {
+    :hostname => "alice.tp3.b2",
+    :ip => "10.3.1.11",
+    :box => "super_box.box",
+    :ram => 1024,
+    :cpu => 1
+  },
+  {
+    :hostname => "bob.tp3.b2",
+    :ip => "10.3.1.200",
+    :box => "super_box.box",
+    :ram => 2048,
+    :cpu => 1
+  },
+  {
+    :hostname => "eve.tp3.b2",
+    :ip => "10.3.1.57",
+    :box => "super_box.box",
+    :ram => 1024,
+    :cpu => 1
+  }
+]
+
+
+
+Vagrant.configure("2") do |config|
+  machines.each do |machine|
+        config.vm.define machine[:hostname] do |node|
+        node.vm.box = machine[:box]
+        node.vm.hostname = machine[:hostname]
+        if machine[:hostname] == "eve.tp3.b2"
+        # pas internet
+        node.vm.network "public_network", bridge: "wlp2s0", type: "dhcp"
+      else
+        # internet
+        node.vm.network "private_network", type: "dhcp"
+      end
+        node.vm.provider "virtualbox" do |vb|
+                vb.gui = false
+                vb.memory = machine[:ram]
+                vb.cpus = machine[:cpu]
+          end
+        end
+      end
+  config.vm.box_check_update = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+end
