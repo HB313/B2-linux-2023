@@ -192,4 +192,6 @@ hb313@fedora:~/work/vagrant/test$
 
 ## 3. Moult VMs
 
-### 🌞 Adaptez votre Vagrantfile
+### 🌞 
+
+voir fichiers Vagrantfile-3A et 3B
